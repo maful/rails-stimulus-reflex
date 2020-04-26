@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ReflexStart</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+      integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <ul>
+      <li><%= link_to 'Home', root_path %></li>
+      <li><%= link_to 'Tasks', tasks_path %></li>
+      <li><%= link_to 'Gravatar', gravatar_index_path %></li>
+      <li><%= link_to 'Book Search', book_search_index_path %></li>
+      <li><%= link_to 'Meal Finder', meal_finder_index_path %></li>
+    </ul>
+    <%= yield %>
+  </body>
+</html>

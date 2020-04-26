@@ -1,0 +1,65 @@
+<div class="container" data-controller="meal-finder" data-reflex-root="#morph">
+  <h1>Meal Finder</h1>
+  <div class="flex">
+    <form class="flex" data-action="submit->meal-finder#search">
+      <input
+        type="text"
+        id="search"
+        placeholder="Search for meals or keywords"
+        data-target="meal-finder.query"
+      />
+      <button class="search-btn" type="submit">
+        <i class="fas fa-search"></i>
+      </button>
+    </form>
+    <button class="random-btn" id="random" data-action="click->meal-finder#random">
+      <i class="fas fa-random"></i>
+    </button>
+  </div>
+
+  <div id="morph">
+    <span data-target="meal-finder.activity" class="text-danger" hidden>
+      <i class="fas fa-spinner fa-spin"></i>
+      Searching for meal...
+    </span>
+
+    <div id="result-heading" data-target="meal-finder.result"></div>
+    <div id="meals" class="meals">
+      <% unless @meals.empty? %>
+        <% @meals.each do |meal| %>
+          <%= link_to 'javascript:void(0)', data: { action: "click->meal-finder#find", id: meal['idMeal'] } do %>
+            <div class="meal">
+              <img src="<%= meal['strMealThumb'] %>" alt="<%= meal['strMeal'] %>" />
+              <div class="meal-info" data-meal-id="<%= meal['idMeal'] %>">
+                <h3><%= meal['strMeal'] %></h3>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <div id="single-meal">
+      <% unless @meal.empty? %>
+        <div class="single-meal">
+          <h1><%= @meal['strMeal'] %></h1>
+          <img src="<%= @meal['strMealThumb'] %>" alt="<%= @meal['strMeal'] %>" />
+          <div class="single-meal-info">
+            <%= @meal['strCategory'] ? "<p>#{@meal['strCategory']}</p>".html_safe : nil %>
+            <%= @meal['strArea'] ? "<p>#{@meal['strArea']}</p>".html_safe : nil %>
+          </div>
+          <div class="main">
+            <p><%= @meal['strInstructions'] %></p>
+            <h2>Ingredients</h2>
+            <ul>
+              <% 1.upto(20) do |i| %>
+                <% if @meal["strIngredient#{i}"].present? && @meal["strMeasure#{i}"] %>
+                  <li><%= @meal["strIngredient#{i}"] %> - <%= @meal["strMeasure#{i}"] %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

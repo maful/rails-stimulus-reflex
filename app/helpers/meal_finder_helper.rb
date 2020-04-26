@@ -1,0 +1,2 @@
+module MealFinderHelper
+end
