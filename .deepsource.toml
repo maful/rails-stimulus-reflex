@@ -1,6 +1,6 @@
 version = 1
 
-test_patterns = ["test/**/*.rb"]
+test_patterns = ["test/*.rb"]
 
 [[analyzers]]
 name = "ruby"
